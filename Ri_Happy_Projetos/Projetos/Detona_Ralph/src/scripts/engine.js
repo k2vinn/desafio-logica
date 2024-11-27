@@ -28,10 +28,14 @@ function countDown(){
     }
 }
 
-function playSound(audioName){
-    let audio = new Audio(`./src/audios/${audioName}.m4a`);
-    audio.volume = 0.2;
-    audio.play();
+const hitAudio = new Audio("./src/audios/hit.mp3");
+hitAudio.volume = 0.2;
+
+function playSound(audio) {
+    audio.currentTime = 0;
+    audio.play().catch(error => {
+        console.error("Erro ao tentar reproduzir o áudio:", error);
+    });
 }
 
 function randomSquare(){
@@ -52,14 +56,16 @@ function addListenerHitBox(){
                 state.values.result++;
                 state.view.score.textContent = state.values.result;
                 state.values.hitPosition = null;
-                playSound(hit);
+                playSound(hitAudio);
             }
         })
     });
 }
 
 function init() {
-    addListenerHitBox();
+    document.addEventListener("DOMContentLoaded", () => {
+        addListenerHitBox();
+    });
 }
 
 init();
