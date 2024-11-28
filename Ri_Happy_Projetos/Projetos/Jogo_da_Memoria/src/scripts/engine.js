@@ -68,3 +68,26 @@ for (let i = 0; i < numFlakes; i++) {
     flake.style.width = flake.style.height = Math.random() * 5 + 5 + 'px'; 
     snowContainer.appendChild(flake);
 }
+
+const sleigh = document.querySelector('.sleigh');
+
+function startSleighAnimation() {
+    const randomHeight = Math.random() * 80 + 10; 
+    sleigh.style.top = randomHeight + 'vh'; 
+    sleigh.style.visibility = 'visible';
+    sleigh.style.animation = 'sleighMove 10s linear';
+
+    
+    setTimeout(() => {
+        sleigh.style.visibility = 'hidden'; 
+        sleigh.style.animation = 'none'; 
+        sleigh.offsetHeight; 
+        sleigh.style.animation = ''; 
+    }, 10000);
+}
+
+
+setInterval(startSleighAnimation, 30000);
+
+
+startSleighAnimation();
